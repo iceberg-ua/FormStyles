@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace FormStyles
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
             _windowStyleGB.Size = Size.Empty;
@@ -43,9 +43,40 @@ namespace FormStyles
             }
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private int CollectFormStyle()
         {
+            int style = 0;
 
+            foreach (var item in _styleSettings)
+            {
+                if(item.Value.Checked)
+                {
+                    style |= (int)item.Key;
+                }
+            }
+
+            return style;
+        }
+
+        StyledForm _testForm = null;
+
+        private void CreateButtonClick(object sender, EventArgs e)
+        {
+            if(_testForm == null)
+            {
+                StyledForm.Style = CollectFormStyle();
+
+                _testForm = new StyledForm
+                {
+                    Location = new Point(100, 100),
+                    Size = new Size(400, 250)
+                };
+
+                _testForm.Show();
+                _testForm.FormClosed += (s, args) => { button1.Text = "Create Form"; _testForm = null; };
+
+                button1.Text = "UpdateForm";
+            }
         }
     }
 }
