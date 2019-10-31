@@ -21,23 +21,23 @@ namespace FormStyles
             InitializeComponent();
         }
 
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                var createParams = new CreateParams
-                {
-                    X = Location.X,
-                    Y = Location.Y,
-                    Height = Size.Height,
-                    Width = Size.Width,
-                    Style = Style,
-                    ExStyle = ExStyle,
-                    ClassStyle = ClassStyle
-                };
+        //protected override CreateParams CreateParams
+        //{
+        //    get
+        //    {
+        //        var createParams = new CreateParams
+        //        {
+        //            X = Location.X,
+        //            Y = Location.Y,
+        //            Height = Size.Height,
+        //            Width = Size.Width,
+        //            Style = (int)Style,
+        //            ExStyle = (int)ExStyle,
+        //            ClassStyle = (int)ClassStyle
+        //        };
 
-                return createParams;
-            }        
-        }
+        //        return createParams;
+        //    }        
+        //}
     }
 }

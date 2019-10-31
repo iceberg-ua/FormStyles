@@ -35,12 +35,15 @@ namespace FormStyles
             int low = 0;
 
             Point location = new Point(10, 15);
+
             _windowStyleGB.Location = new Point(10, 5);
             FillStyleGroups(typeof(WinApi.WindowStyles), location, _windowStyleGB, _styleSettings);
             low = Math.Max(low, _windowStyleGB.Bottom);
+
             _windowStyleExGB.Location = new Point(_windowStyleGB.Right + 5, 5);
             FillStyleGroups(typeof(WinApi.WindowExStyles), location, _windowStyleExGB, _styleExSettings);
             low = Math.Max(low, _windowStyleExGB.Bottom);
+
             _classStyleGB.Location = new Point(_windowStyleExGB.Right + 5, 5);
             FillStyleGroups(typeof(WinApi.ClassStyle), location, _classStyleGB, _classStyleSettings);
             low = Math.Max(low, _classStyleGB.Bottom);
@@ -91,28 +94,33 @@ namespace FormStyles
 
         private void CreateButtonClick(object sender, EventArgs e)
         {
-            if(_testForm == null)
-            {
-                StyledForm.Style = CollectFormStyle(_styleSettings);
-                StyledForm.ExStyle = CollectFormStyle(_styleExSettings);
-                StyledForm.ClassStyle = CollectFormStyle(_classStyleSettings);
+            StyledForm.Style = CollectFormStyle(_styleSettings);
+            StyledForm.ExStyle = CollectFormStyle(_styleExSettings);
+            StyledForm.ClassStyle = CollectFormStyle(_classStyleSettings);
 
+            if (_testForm == null)
+            {
                 _testForm = new StyledForm
                 {
                     Location = new Point(900, 100),
                     Size = new Size(400, 250)
                 };
 
-                _testForm.Show();
                 _testForm.FormClosed += (s, args) => { button1.Text = "Create Form"; _testForm = null; };
-
                 button1.Text = "UpdateForm";
             }
+
+            WinApi.SetWindowLong(_testForm.Handle, (int)WinApi.GWLParameter.GWL_STYLE, StyledForm.Style);
+            WinApi.SetWindowLong(_testForm.Handle, (int)WinApi.GWLParameter.GWL_EXSTYLE, StyledForm.ExStyle);
+            WinApi.SetWindowLong(_testForm.Handle, (int)WinApi.GCLParameter.GCL_STYLE, StyledForm.ClassStyle);
+
+            _testForm.Show();
         }
+
 
         private void CloseButtonClick(object sender, EventArgs e)
         {
-            _testForm.Close();
+            _testForm?.Close();
         }
     }
 }

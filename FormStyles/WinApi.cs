@@ -14,6 +14,33 @@ namespace FormStyles
         [DllImport("user32.dll")]
         public extern static int GetWindowLong(IntPtr hWnd, int nIndex);
 
+        public enum GWLParameter
+        {
+            GWL_EXSTYLE = -20, //Sets a new extended window style
+            GWL_HINSTANCE = -6, //Sets a new application instance handle.
+            GWL_HWNDPARENT = -8, //Set window handle as parent
+            GWL_ID = -12, //Sets a new identifier of the window.
+            GWL_STYLE = -16, // Set new window style
+            GWL_USERDATA = -21, //Sets the user data associated with the window. 
+            //This data is intended for use by the application 
+            //that created the window. Its value is initially zero.
+            GWL_WNDPROC = -4 //Sets a new address for the window procedure.
+        }
+
+        public enum GCLParameter
+        {
+            GCL_CBCLSEXTRA = -20,
+            GCL_CBWNDEXTRA = -18,
+            GCL_HBRBACKGROUND = -10,
+            GCL_HCURSOR = -12,
+            GCL_HICON = -14,
+            GCL_HICONSM = -34,
+            GCL_HMODULE = -16,
+            GCL_MENUNAME = -8,
+            GCL_STYLE = -26,
+            GCL_WNDPROC = -24
+        }
+
         internal enum ClassStyle : int
         {
             CS_BYTEALIGNCLIENT = 0x1000,
